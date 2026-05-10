@@ -7,7 +7,7 @@ Debugging: Instead of just fixing errors, Codigan teaches kids how to analyze an
 AI Fluency: We prepare students for a world shaped by Artificial Intelligence, building a foundation of ethics and understanding.
 Critical Logic & Strategy: Strengthening "Computational Thinking"—the ability to break big challenges into small, solvable steps.🧩 Visual Logic, Real Results Powered by Blockly, Codigan uses a high-level visual interface. This allows kids to master complex programming logic without getting stuck on typing errors, making the transition to professional code natural and intuitive.🎯   
 
-Why Parents & Educators Choose CodiganWe don't just teach kids to follow instructions; we teach them to innovate. Codigan builds the confidence needed to move from being a consumer of technology to becoming a creator of it.
+Why Parents & Educators Choose Codigan: We don't just teach kids to follow instructions; we teach them to innovate. Codigan builds the confidence needed to move from being a consumer of technology to becoming a creator of it.
 The Innovation Roadmap Codigan is evolving! Our upcoming features include:
 Gamified Learning:Customizable Avatars and earning achievements for mastering difficult logic puzzles.
 Machine Learning for Kids: Specialized courses on how AI "thinks.

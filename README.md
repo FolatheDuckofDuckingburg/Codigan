@@ -1,4 +1,6 @@
-Codigan is an AI-powered learning ecosystem designed to transform the way children interact with technology. It’s more than just a coding app; it’s a personal tutor that guides young minds through the logic of Computer Science, the creativity of AI, and the art of problem-solving.🚀 What Codigan Delivers 
+Codigan is an AI-powered learning ecosystem designed to transform the way children interact with technology. It’s more than just a coding app; it’s a personal tutor that guides young minds through the logic of Computer Science, the creativity of AI, and the art of problem-solving.
+
+🚀 What Codigan Delivers 
 Guided Learning Journeys: Step-by-step interactive lessons that turn complex coding concepts into manageable milestones.Intelligent 
 Debugging: Instead of just fixing errors, Codigan teaches kids how to analyze and solve problems like real engineers.
 AI Fluency: We prepare students for a world shaped by Artificial Intelligence, building a foundation of ethics and understanding.

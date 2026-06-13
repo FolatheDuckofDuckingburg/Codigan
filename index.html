@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codigan // Chess Challenge</title>
+    <title>Codigan // Chess & Game Compiler</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -29,6 +29,54 @@
         .line-numbers {
             text-align: right;
             user-select: none;
+        }
+
+        /* Announcement Bar Custom Styles */
+        .announce-bar {
+            background-color: #17120a;
+            border-bottom: 1px solid #3b2314;
+            color: #fef3c7;
+            padding: 0.625rem 1rem;
+            font-family: 'Fira Code', monospace;
+        }
+        .announce-bar__inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .announce-bar__text {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            flex-wrap: wrap;
+        }
+        .announce-bar__brand {
+            font-weight: 700;
+            color: #fbbf24;
+        }
+        .announce-bar__count {
+            background-color: #451a03;
+            border: 1px solid #78350f;
+            color: #fef3c7;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+        }
+        .announce-bar__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #34d399;
+            font-weight: 700;
+        }
+        .announce-bar__cta:hover {
+            color: #6ee7b7;
+            text-decoration: underline;
         }
 
         /* Smooth visual block card transitions */
@@ -63,23 +111,25 @@
         }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col overflow-x-hidden selection:bg-emerald-500 selection:text-black">
-    <body class="has-announce">
+<body class="text-slate-100 min-h-screen flex flex-col overflow-x-hidden selection:bg-emerald-500 selection:text-black has-announce">
+
+    <!-- Keep Android Open Announcement Banner -->
     <aside class="announce-bar" id="announceBar" role="region" aria-label="Keep Android Open warning">
-    <div class="announce-bar__inner container">
-        <svg class="announce-bar__icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
-            <path d="M12 2.5 0.8 22h22.4L12 2.5zm0 5L19.7 20H4.3L12 7.5zm-1 4.5v5h2v-5h-2zm0 6v2h2v-2h-2z"/>
-        </svg>
-        <p class="announce-bar__text">
-            <span class="announce-bar__brand">Keep Android Open</span>
-            <span class="announce-bar__verify">— Google enforces developer verification in</span>
-        </p>
-        <span class="announce-bar__count" id="kaoCountdown" data-target="2026-09-01T00:00:00Z">soon</span>
-        <a href="/blog/keep-android-open/" class="announce-bar__cta" aria-label="Read why this matters">
-            <span class="announce-bar__cta__label">Read why</span>
-            <span class="announce-bar__cta__arrow" aria-hidden="true">→</span>
-        </a>
-    </div>
+        <div class="announce-bar__inner container">
+            <svg class="announce-bar__icon text-amber-500 shrink-0" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.5 0.8 22h22.4L12 2.5zm0 5L19.7 20H4.3L12 7.5zm-1 4.5v5h2v-5h-2zm0 6v2h2v-2h-2z"/>
+            </svg>
+            <p class="announce-bar__text text-xs">
+                <span class="announce-bar__brand">Keep Android Open</span>
+                <span class="announce-bar__verify text-slate-300">— Google enforces developer verification in</span>
+            </p>
+            <span class="announce-bar__count text-xs" id="kaoCountdown" data-target="2026-09-01T00:00:00Z">soon</span>
+            <a href="https://keepandroidopen.github.io/" target="_blank" class="announce-bar__cta text-xs" aria-label="Read why this matters">
+                <span class="announce-bar__cta__label">Read why</span>
+                <span class="announce-bar__cta__arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
+    </aside>
 
     <!-- Header Panel -->
     <header class="border-b border-slate-800 bg-[#0f172a]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex flex-wrap justify-between items-center gap-4">
@@ -91,9 +141,9 @@
                 </svg>
             </div>
             <div>
-                <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest font-mono">Coding Sandbox</span>
+                <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest font-mono">Interactive Coding Sandbox</span>
                 <h1 class="text-xl font-extrabold text-slate-100 tracking-tight flex items-center gap-2 font-mono">
-                    CODIGAN:<span class="text-emerald-400">Chess Challenge</span>
+                    CODIGAN:<span class="text-emerald-400">~/chess-engine</span>
                 </h1>
             </div>
         </div>
@@ -110,10 +160,10 @@
         <!-- Mode Selectors -->
         <div class="flex bg-slate-900 border border-slate-800 p-1 rounded-lg">
             <button id="btn-mode-campaign" onclick="switchMode('campaign')" class="px-4 py-1.5 rounded-md text-xs font-bold transition font-mono bg-emerald-500 text-black">
-                Puzzle
+                CAMPAIGN_PUZZLE
             </button>
             <button id="btn-mode-creator" onclick="switchMode('creator')" class="px-4 py-1.5 rounded-md text-xs font-bold transition font-mono text-slate-400 hover:text-slate-200">
-                Sandbox Mode
+                GAME_CREATOR_MODE
             </button>
         </div>
 
@@ -121,7 +171,7 @@
         <div class="flex items-center gap-2.5 text-xs font-mono">
             <button id="btn-reset-game" class="bg-slate-900 hover:bg-slate-800 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 transition flex items-center gap-1.5">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.27 15" /></svg>
-                Reset workspace
+                RESET_WORKSPACE
             </button>
             <button id="btn-audio-toggle" class="bg-slate-900 hover:bg-slate-800 text-slate-300 p-2 rounded-lg border border-slate-800 transition">
                 <svg id="audio-icon-on" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
@@ -138,7 +188,7 @@
             <!-- Educational Concept Corner -->
             <div id="concept-corner" class="bg-[#121c33] border border-emerald-500/30 rounded-xl p-4 relative overflow-hidden transition-all duration-300">
                 <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-400 text-[9px] uppercase font-mono font-bold tracking-wider px-2 py-1 rounded-bl">
-                    Definition 
+                    Concept Explorer
                 </div>
                 <div class="flex items-start gap-3">
                     <span class="text-xl">💡</span>
@@ -155,7 +205,7 @@
             <div class="bg-[#111726] border border-slate-800 rounded-xl p-4 flex items-start gap-3.5 relative overflow-hidden">
                 <div id="instruction-icon" class="bg-emerald-500/10 text-emerald-400 p-2 rounded-lg border border-emerald-500/20 text-sm mt-0.5">🎮</div>
                 <div class="w-full">
-                    <h3 id="instruction-title" class="font-bold text-slate-200 text-sm tracking-wide">Puzzle Instructions</h3>
+                    <h3 id="instruction-title" class="font-bold text-slate-200 text-sm tracking-wide">PUZZLE CAMPAIGN DIRECTIVE</h3>
                     <p id="level-instruction" class="text-xs text-slate-400 mt-1 leading-relaxed font-mono">
                         Level 1: System path clear. Type moveRight(); three times in the editor, then click Compile & Run to secure the King target.
                     </p>
@@ -173,7 +223,7 @@
                             &lt;/&gt; Code Editor
                         </button>
                         <button id="tab-blocks" onclick="setWorkspaceType('blocks')" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition duration-200 text-slate-400 hover:text-slate-200">
-                             Blocks
+                            🧩 Visual Blocks
                         </button>
                     </div>
                     <div class="flex items-center gap-1.5">
@@ -195,7 +245,7 @@
                 <!-- Visual Blocks Stacking Workspace Area -->
                 <div id="blocks-workspace-container" class="hidden flex-1 bg-[#0b0f17] p-4 flex flex-col gap-4 overflow-y-auto max-h-[350px]">
                     <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-                        <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold font-mono">Block Stack</span>
+                        <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold font-mono">Workspace Block Stack</span>
                         <button onclick="clearBlocksStack()" class="text-[10px] text-red-400 hover:text-red-300 font-mono">[Clear Blocks]</button>
                     </div>
                     
@@ -419,8 +469,8 @@
                     </div>
 
                     <div class="col-span-4 text-center">
-                        <p class="text-slate-300 font-mono">Folarera Kassim</p>
-                        <p class="text-[8px] text-slate-500 font-bold border-t border-slate-800 mt-1 uppercase">Creator of Codigan</p>
+                        <p class="text-slate-300 font-mono">PSY_DUCK_MSTR</p>
+                        <p class="text-[8px] text-slate-500 font-bold border-t border-slate-800 mt-1 uppercase">GRANDMASTER_CORE</p>
                         <p class="text-[7px] text-slate-600 font-mono">AUTOMATED_MENTOR</p>
                     </div>
                 </div>
@@ -1696,9 +1746,36 @@
             }
         });
 
+        // Countdown timer initialization function
+        function initCountdown() {
+            const countdownEl = document.getElementById('kaoCountdown');
+            if (!countdownEl) return;
+            const targetDateStr = countdownEl.getAttribute('data-target');
+            const targetDate = new Date(targetDateStr).getTime();
+
+            function updateTime() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference <= 0) {
+                    countdownEl.innerText = "Now Active";
+                    return;
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                countdownEl.innerText = `${days}d ${hours}h left`;
+            }
+
+            updateTime();
+            setInterval(updateTime, 60000); // Update every minute
+        }
+
         // Start Core App
         window.onload = function() {
             switchMode('campaign');
+            initCountdown();
         };
     </script>
 </body>
